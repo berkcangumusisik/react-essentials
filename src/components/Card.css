@@ -1,0 +1,31 @@
+.card {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-title {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-content {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Kart varyantları */
+.card.gradient-bg {
+  background: linear-gradient(135deg, var(--primary-900), var(--neutral-900));
+}
+
+/* Animasyonlar */
+.card.glass-hover {
+  transition: all var(--transition-normal);
+}
+
+.card.glass-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}

@@ -1,65 +1,62 @@
-import Header from "./components/Header";
-import ComponentsImage from "./assets/components.png";
-import CoreConcept from './components/CoreConcept';
-import JsxImage from "./assets/jsx-ui.png";
-import PropsImage from "./assets/config.png";
-import StateImage from "./assets/state-mgmt.png";
-import TabButton from './components/TabButton';
-const CORE_CONCEPTS = [
-  {
-    title: 'Components',
-    description: 'The core UI building block - compose the user interface by combining multiple components.',
-    image: ComponentsImage,
-  },
-  {
-    title: 'JSX',
-    description: 'Return (potentially dynamic) HTML(ish) code to define the actual markup that will be rendered.',
-    image: JsxImage,
-  },
-  {
-    title: 'Props',
-    description: 'Make components configurable (and therefore reusable) by passing input data to them.',
-    image: PropsImage,
-  },
-  {
-    title: 'State',
-    description: 'React-managed data which, when changed, causes the component to re-render & the UI to update',
-    image: StateImage,
-  }
-];
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Header from './components/Header';
+import { CoreConcepts } from './components/CoreConcept';
+import { SetupSteps } from './components/SetupSteps';
+import Examples from './components/Examples';
+import LanguageSelector from './components/LanguageSelector';
+import { translations } from './translations';
+import { CORE_CONCEPTS, SETUP_CONCEPTS } from './components/data';
 
 function App() {
-  function handleSelect(selectedButton) {
-    console.log(selectedButton);
-  }
+  const [currentLang, setCurrentLang] = useState(() => {
+    // Tarayıcı dilini veya localStorage'dan kayıtlı dili al
+    const savedLang = localStorage.getItem('preferredLanguage');
+    const browserLang = navigator.language.split('-')[0];
+    return savedLang || (translations[browserLang] ? browserLang : 'en');
+  });
+
+  useEffect(() => {
+    // Dil tercihini kaydet
+    localStorage.setItem('preferredLanguage', currentLang);
+    // HTML lang attribute'unu güncelle
+    document.documentElement.lang = currentLang;
+  }, [currentLang]);
+
+  const t = translations[currentLang];
+
   return (
-    <div className="container">
-      <Header />
-      <main>
-        <section id="core-concepts">
-          <h2>Core Concepts</h2>
-          <ul className="concepts-list">
-            {CORE_CONCEPTS.map((concept) => (
-              <CoreConcept 
-                key={concept.title}
-                {...concept}
-              />
-            ))}
-          </ul>
-        </section>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={currentLang}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+      >
+        <LanguageSelector
+          currentLang={currentLang}
+          onLanguageChange={setCurrentLang}
+        />
+        <Header
+          title={t.title}
+          subtitle={t.subtitle}
+          description={t.headerDescription}
+        />
+        <main className="container">
+          <section>
+            <h2 className="gradient-text">{t.setup.title}</h2>
+            <SetupSteps concepts={SETUP_CONCEPTS} translations={t} />
+          </section>
 
+          <section>
+            <h2 className="gradient-text">{t.coreConcepts.title}</h2>
+            <CoreConcepts concepts={CORE_CONCEPTS} translations={t} />
+          </section>
 
-        <section id="examples">
-          <h2>Examples</h2>
-          <menu>
-            <TabButton onSelect={handleSelect}>Components</TabButton>
-            <TabButton onSelect={handleSelect}>JSX</TabButton>
-            <TabButton onSelect={handleSelect}>Props</TabButton>
-            <TabButton onSelect={handleSelect}>State</TabButton>
-          </menu>
-        </section>
-      </main>
-    </div>
+          <Examples translations={t} />
+        </main>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 

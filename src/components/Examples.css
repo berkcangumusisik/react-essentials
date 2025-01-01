@@ -1,0 +1,474 @@
+.examples-section {
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.loading-container {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.tab-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.content-card {
+  position: relative;
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.example-preview {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.example-preview img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.code-actions {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: var(--z-elevate);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.example-preview:hover .code-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.code-toggle-btn,
+.try-btn {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.code-toggle-btn {
+  background: rgba(124, 58, 237, 0.8);
+}
+
+.code-toggle-btn:hover {
+  background: rgba(109, 40, 217, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.try-btn {
+  background: rgba(6, 182, 212, 0.8);
+}
+
+.try-btn:hover {
+  background: rgba(8, 145, 178, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.code-preview {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+.code-preview pre {
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+  background: transparent !important;
+}
+
+.code-preview code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  color: var(--neutral-200);
+  text-shadow: none;
+}
+
+/* Kod kopyalama butonu */
+.code-preview .copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 4px;
+  color: var(--neutral-300);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.code-preview .copy-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--neutral-100);
+}
+
+/* Syntax highlighting renkleri */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6c7a89;
+}
+
+.token.punctuation {
+  color: #a8b1bb;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+  color: #ff79c6;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin {
+  color: #50fa7b;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #bd93f9;
+}
+
+.token.keyword {
+  color: #ff79c6;
+}
+
+.token.function {
+  color: #50fa7b;
+}
+
+/* Animasyonlar */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+  .examples-section {
+    padding: 1rem;
+  }
+
+  .tab-menu {
+    justify-content: center;
+  }
+
+  .code-actions {
+    position: static;
+    opacity: 1;
+    transform: none;
+    margin-top: 1rem;
+    justify-content: center;
+  }
+
+  .code-preview {
+    font-size: 0.8rem;
+  }
+
+  .example-preview {
+    padding: 0.5rem;
+  }
+
+  .example-preview img {
+    max-height: 200px;
+  }
+
+  .code-toggle-btn,
+  .try-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .example-preview::after {
+    display: none;
+  }
+}
+
+/* Dark mode optimizasyonu */
+@media (prefers-color-scheme: dark) {
+  .code-preview {
+    background: rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Hover efektleri */
+.examples-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.example-preview::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 70%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.example-preview:hover::after {
+  opacity: 1;
+}
+
+/* Terminal stillerini ekleyelim */
+.terminal-window {
+  background: #1e1e1e;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 2rem 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  font-family: 'Fira Code', monospace;
+  border: 1px solid #2d2d2d;
+}
+
+.terminal-header {
+  background: #2d2d2d;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #3d3d3d;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal-buttons span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.terminal-buttons span:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.5rem;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+.close {
+  background: #ff5f56;
+}
+.minimize {
+  background: #ffbd2e;
+}
+.maximize {
+  background: #27c93f;
+}
+
+.terminal-title {
+  color: #999;
+  font-size: 0.9rem;
+  flex-grow: 1;
+  margin-left: 1rem;
+  text-align: center;
+}
+
+.file {
+  color: #a5d6a7;
+}
+
+.terminal-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.copy-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  color: #ddd;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.copied {
+  color: #27c93f;
+}
+
+.terminal-content {
+  padding: 1rem;
+  background: #1e1e1e;
+  min-height: 300px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.code-block {
+  margin: 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2) !important;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Syntax highlighting renkleri güncelleniyor */
+.token.comment {
+  color: #6a9955;
+  font-style: italic;
+}
+.token.string {
+  color: #ce9178;
+}
+.token.number {
+  color: #b5cea8;
+}
+.token.keyword {
+  color: #569cd6;
+  font-weight: bold;
+}
+.token.function {
+  color: #dcdcaa;
+}
+.token.operator {
+  color: #d4d4d4;
+}
+.token.punctuation {
+  color: #d4d4d4;
+}
+.token.property {
+  color: #9cdcfe;
+}
+.token.tag {
+  color: #569cd6;
+}
+.token.attr-name {
+  color: #9cdcfe;
+}
+.token.attr-value {
+  color: #ce9178;
+}
+
+/* Line numbers eklenebilir */
+.line-numbers {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  color: #666;
+  text-align: right;
+  padding: 1rem 0.5rem;
+  user-select: none;
+}
+
+/* Responsive düzenlemeler güncelleniyor */
+@media (max-width: 768px) {
+  .terminal-window {
+    margin: 1rem 0;
+    font-size: 0.8rem;
+  }
+
+  .terminal-content {
+    min-height: 200px;
+    max-height: 400px;
+  }
+
+  .terminal-buttons span {
+    width: 10px;
+    height: 10px;
+  }
+
+  .terminal-title {
+    font-size: 0.8rem;
+  }
+
+  .copy-btn {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .code-block {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+}

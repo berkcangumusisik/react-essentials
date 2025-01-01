@@ -1,14 +1,9 @@
-function TabButton({ children, onSelect }) {
-    function handleClick() {
-        onSelect();
-    }
-    return (
-        <li>
-            <button onClick={handleClick}>
-                {children}
-            </button>
-        </li>
-    );
-}
+import './TabButton.css';
 
-export default TabButton;
+export default function TabButton({ children, isSelected, ...props }) {
+  return (
+    <button className={`tab-button ${isSelected ? 'active' : ''}`} {...props}>
+      {children}
+    </button>
+  );
+}

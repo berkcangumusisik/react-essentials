@@ -1,13 +1,21 @@
-import "./CoreConcept.css";
+import './CoreConcept.css';
 
-function CoreConcept({ image, title, description }) {
-    return (
-        <li>
-            <img src={image} alt={title} />
-            <h3>{title}</h3>
-            <p>{description}</p>
+export function CoreConcepts({ concepts, translations }) {
+  return (
+    <ul className="concepts-list">
+      {concepts.map((concept) => (
+        <li key={concept.title} className="concept">
+          <img src={concept.image} alt={concept.title} />
+          <h3>
+            {translations.coreConcepts[concept.title.toLowerCase()]?.title ||
+              concept.title}
+          </h3>
+          <p>
+            {translations.coreConcepts[concept.title.toLowerCase()]
+              ?.description || concept.description}
+          </p>
         </li>
-    );
+      ))}
+    </ul>
+  );
 }
-
-export default CoreConcept;

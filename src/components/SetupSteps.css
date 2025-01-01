@@ -1,0 +1,99 @@
+.setup-terminal {
+  margin-top: 1.5rem;
+  background: #1e1e1e;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Fira Code', monospace;
+}
+
+.terminal-header {
+  background: #2d2d2d;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid #3d3d3d;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal-buttons span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.close {
+  background: #ff5f56;
+}
+.minimize {
+  background: #ffbd2e;
+}
+.maximize {
+  background: #27c93f;
+}
+
+.terminal-title {
+  color: #999;
+  font-size: 0.85rem;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.terminal-content {
+  padding: 1rem;
+  background: #1e1e1e;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.terminal-content pre {
+  margin: 0;
+  padding: 0;
+}
+
+.terminal-content code {
+  color: #ddd;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+/* Command syntax highlighting */
+.terminal-content code .command {
+  color: #6a9955;
+}
+
+.terminal-content code .comment {
+  color: #6a9955;
+  font-style: italic;
+}
+
+/* Responsive düzenlemeler */
+@media (max-width: 1200px) {
+  .terminal-content {
+    max-height: 250px;
+  }
+
+  .terminal-content code {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .setup-terminal {
+    font-size: 0.8rem;
+  }
+
+  .terminal-content {
+    max-height: 200px;
+    padding: 0.75rem;
+  }
+
+  .terminal-header {
+    padding: 0.5rem;
+  }
+}
